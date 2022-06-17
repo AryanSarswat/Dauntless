@@ -1,28 +1,26 @@
 .links {
-	background-color: #123;
+	background-color: rgb(8, 23, 37);
 	background-image: linear-gradient(to bottom, #0003, transparent);
-	border-bottom: 1px solid #0003;
-	box-shadow: 0 0 32px #0003;
+	border-bottom: 2px solid #0003;
+	box-shadow: 0 0 16px #0003;
 	font-size: 2em;
 	font-weight: 300;
     display: flex;
-    justify-content: space-around;
-	position: abs;
+    justify-content: safe center;
+	position: flex;
     align-items: center;
 }
 
 .links >  .link {
-	color: #9ab;
-	padding: .50em;
-	text-align: center;
+	color: rgb(176, 211, 245);
+	padding: .15em;
 	text-decoration: none;
-	transition: all .5s;
-    list-style: none;
+	transition: all .75s;
     text-align: center;
 }
 
 .links > .link:hover {
-	background: #05228006;
-	color: rgb(0, 153, 255);
+	background: #033df806;
+	color: rgb(255, 0, 170);
 	opacity: 80%;
 }
