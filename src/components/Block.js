@@ -31,6 +31,11 @@ class Block {
         return hash(hashedItems)
     }
 
+    get time() {
+        let date = new Date(this.timestamp)
+        return date.toLocaleString()
+    }
+
     addChild(child) {
         this.childHashes.push(child.hash)
     }

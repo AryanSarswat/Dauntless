@@ -31,6 +31,10 @@ class BlockChain {
         return this.blockMappings[blockHash]
     }
 
+    getAllBlocks() {
+        return Object.values(this.blockMappings)
+    }
+
     traceBlock(blockHash) {
         let block = this.getBlock(blockHash)
         let trace = []
