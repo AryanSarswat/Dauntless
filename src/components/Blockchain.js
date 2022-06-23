@@ -61,10 +61,19 @@ class BlockChain {
     }
 
     traceBlock(blockHash) {
+        if (blockHash === "") {
+            return []
+        }
+
         let block = this.getBlock(blockHash)
         let trace = []
         while (block != null) {
-            trace.unshift(block)
+            let verify = Encryption.verifySignature(this.ipfs.retrieve(block.dataAddress), block.signature, block.publicKey)
+            const toPush = {
+                block: block,
+                verified: verify,
+            }
+            trace.unshift(toPush)
             block = block.parentBlock
         }
         return trace

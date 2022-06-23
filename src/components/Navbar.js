@@ -10,6 +10,7 @@ function Navbar() {
               <Link className= "link" to="/">Home</Link>
               <Link className= "link" to="/Blocks">Block Page</Link>
               <Link className= "link" to="/Trace">Trace Block</Link>
+              <Link className= "link" to="/IPFS">IPFS Page</Link>
               <Link className= "link" to="/Graph">Graph Page</Link>
             </nav>
         </header>

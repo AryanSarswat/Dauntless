@@ -24,6 +24,8 @@ function Home(props) {
 
         const newBlock = props.blockchain.addBlock(header, content, parentHash, author)
 
+        console.log(newBlock)
+
         setNewBlockHeader(newBlock.header)
         setNewBlockdataAddress(newBlock.dataAddress)
         setNewBlockTimeStamp(newBlock.timestamp)
@@ -47,10 +49,10 @@ function Home(props) {
                         <div className="form-container">
                             <h2> Add Block </h2>
                             
-                            <FloatingLabel label="Header " id='header' className= 'floating-label' onChange={event => setHeader(event.target.value)}/>
-                            <FloatingLabel label="Author " id='author' className= 'floating-label' onChange={event => setAuthor(event.target.value)}/>
-                            <FloatingLabel label="Parent Hash " id='hash' className= 'floating-label' onChange={event => event.target.value !== "" ? setParentHash(event.target.value) : null}/>
-                            <FloatingLabel label="Content " id='content' className= 'floating-label' onChange={event => setContent(event.target.value)}/>
+                            <FloatingLabel label="Header " id='header' className= 'floating-label-home' onChange={event => setHeader(event.target.value)}/>
+                            <FloatingLabel label="Author " id='author' className= 'floating-label-home' onChange={event => setAuthor(event.target.value)}/>
+                            <FloatingLabel label="Parent Hash " id='hash' className= 'floating-label-home' onChange={event => event.target.value !== "" ? setParentHash(event.target.value) : null}/>
+                            <FloatingLabel label="Content " id='content' className= 'floating-label-home' onChange={event => setContent(event.target.value)}/>
 
                             <button onClick={handleAddBlockClick} className="add-block-btn"><span>Add Block</span></button>
 

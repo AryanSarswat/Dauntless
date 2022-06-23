@@ -5,10 +5,8 @@
 	box-shadow: 0 0 16px #0003;
 	font-size: 2em;
 	font-weight: 300;
+	width: 100%;
     display: flex;
-    justify-content: safe center;
-	position: flex;
-    align-items: center;
 }
 
 .links >  .link {
@@ -17,6 +15,9 @@
 	text-decoration: none;
 	transition: all .75s;
     text-align: center;
+	width: 50vh;
+	display: flex;
+	justify-content: space-between;
 }
 
 .links > .link:hover {

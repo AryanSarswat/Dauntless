@@ -16,7 +16,6 @@ class Encryption {
             const encrypt = new JSEncrypt()
             encrypt.setKey(privateKey)
             const sig = encrypt.sign(text, (str) => hash(str), "sha256")
-            console.log(sig)
             return sig;
         }
         return signData(text, privateKey)

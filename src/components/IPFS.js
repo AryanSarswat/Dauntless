@@ -15,8 +15,12 @@ class IPFS {
         if (dataAddress in this.storage) {
             return this.storage[dataAddress]
         } else {
-            console.log("There is no content associated with this data address")
+            return "There is no content associated with this data address"
         }
+    }
+
+    getAll() {
+        return Object.entries(this.storage)
     }
 }
 
