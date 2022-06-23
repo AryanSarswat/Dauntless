@@ -1,6 +1,7 @@
 {
   "name": "my-app",
   "version": "0.1.0",
+  "homepage": "https://AryanSarswat.github.io",
   "private": true,
   "dependencies": {
     "@coreui/react": "^4.2.2",
@@ -19,6 +20,8 @@
     "react-scripts": "^5.0.1"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -44,5 +47,8 @@
   },
   "browser": {
     "crypto": false
+  },
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
   }
 }
