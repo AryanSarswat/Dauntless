@@ -7,7 +7,7 @@ function BlockPage(props) {
         <div className="block-page-container">
             <h1> Blocks </h1>
             {props.blockchain.getAllBlocks().map(block => {
-                return <Collapse header={block.header}>
+                return <Collapse header={block.header} id={block.hash}>
                     <ul>
                         <li className='collapsible-label'>Hash: {block.hash}</li>
                         <li className='collapsible-label'>Nonce: {block.nonce}</li>

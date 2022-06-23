@@ -1,4 +1,7 @@
+import Encryption from './Encryption.js';
 import Graph from './Graph.js';
+import Block from './Block.js';
+import IPFS from './IPFS.js';
 
 class BlockChain {
 
@@ -8,6 +11,28 @@ class BlockChain {
     constructor() {
         this.chain = new Graph()
         this.blockMappings = {}
+        this.encryptionThirdParty = new Encryption()
+        this.users = {}
+        this.ipfs = new IPFS()
+    }
+
+    addBlock(header, content, parentHash, author) {
+        if (!(author in this.users)) {
+            this.users[author] = Encryption.generateKeyPair()
+        }
+        
+        const publicKey = this.users[author]['publicKey']
+        const privateKey = this.users[author]['privateKey']
+        
+        const dataAddress = this.ipfs.store(content)
+
+        const signature = Encryption.signText(content, privateKey);
+
+        const newBlock = Block.createBlock(header, dataAddress, parentHash, signature, publicKey)
+
+        this.mine(parentHash || null, newBlock)
+
+        return newBlock
     }
 
     mine(parentBlockHash, newBlock) {

@@ -2,7 +2,6 @@ import React from 'react';
 import ReactSplit, { SplitDirection } from '@devbookhq/splitter'
 import FloatingLabel from "react-bootstrap-floating-label";
 import "./Home.css"
-import Block from '../components/Block';
 
 function Home(props) {
 
@@ -14,28 +13,24 @@ function Home(props) {
 
     const [newBlockHeader, setNewBlockHeader] = React.useState("")
     const [newBlockdataAddress, setNewBlockdataAddress] = React.useState("")
-    const [newBlockdataAddressHash, setNewBlockdataAddressHash] = React.useState("")
     const [newBlockTimeStamp, setNewBlockTimeStamp] = React.useState("")
     const [newBlockParentHash, setNewBlockParentHash] = React.useState("")
     const [newBlockHash, setNewBlockHash] = React.useState("")
     const [newBlockOwnerPublicKey, setNewBlockOwnerPublicKey] = React.useState("")
     const [newBlockSignature, setNewBlockSignature] = React.useState("")
-    const [newBlockChildHashes, setNewBlockChildHashes] = React.useState("")
 
     
     function handleAddBlockClick() {
-        let newBlock = Block.createBlock(header, content, content, parentHash, author, author)
-        props.blockchain.mine(parentHash || null, newBlock)
-        
+
+        const newBlock = props.blockchain.addBlock(header, content, parentHash, author)
+
         setNewBlockHeader(newBlock.header)
         setNewBlockdataAddress(newBlock.dataAddress)
-        setNewBlockdataAddressHash(newBlock.dataAddressHash)
         setNewBlockTimeStamp(newBlock.timestamp)
         setNewBlockParentHash(newBlock.parentHash)
         setNewBlockHash(newBlock.hash)
         setNewBlockSignature(newBlock.signature)
         setNewBlockOwnerPublicKey(newBlock.ownerPublicKey)
-        setNewBlockChildHashes(newBlock.childHashes)
         
         setHeader("")
         setAuthor("")
@@ -66,13 +61,11 @@ function Home(props) {
                         <div className="block-container">
                             <label className="new-block-labels">Header: {newBlockHeader} </label>
                             <label className="new-block-labels">Data Address: {newBlockdataAddress} </label>
-                            <label className="new-block-labels">Data Address Hash: {newBlockdataAddressHash} </label>
                             <label className="new-block-labels">Timestamp: {newBlockTimeStamp} </label>
-                            <label className="new-block-labels">Parent Hash: {newBlockParentHash} </label>
+                            <label className="new-block-labels">Parent Hash: {newBlockParentHash === '' ? "No Parent" : newBlockParentHash} </label>
                             <label className="new-block-labels">Block Hash: {newBlockHash} </label>
                             <label className="new-block-labels">Owner Public Key: {newBlockOwnerPublicKey} </label>
                             <label className="new-block-labels">Signature:  {newBlockSignature}</label>
-                            <label className="new-block-labels">Child Hashes: {newBlockChildHashes}</label>
                         </div>
                     </div>
                 </ReactSplit>
