@@ -70,3 +70,13 @@
     opacity: 1;
     right: 0;
 }
+
+.mark-trace-red {
+    background-color: inherit;
+    color: #ff0000;
+}
+
+.mark-trace-green {
+    background-color: inherit;
+    color: #15ff00;
+}

@@ -13,12 +13,12 @@ function IPFSPage(props) {
 
     return (
         <div className="fetch-data-container">
-            <h1>Trace</h1>
-            <div>
+            <h1>IPFS Retrival</h1>
+            <div className='content-container'>
                 <span>{props.blockchain.ipfs.retrieve(blockToFetch)}</span>    
             </div> 
-            <FloatingLabel label="Address of Data " id='address-fetch' className= 'floating-label' onChange={(event) => setBlockToFetchForm(event.target.value)}/>
-            <button onClick={handleFetchData} className="fetch-data-btn"><span>Trace Block</span></button>
+            <FloatingLabel label="Address of Data " id='address-fetch' className= 'floating-label-IPFS' onChange={(event) => setBlockToFetchForm(event.target.value)}/>
+            <button onClick={handleFetchData} className="fetch-data-btn"><span>Get Block content</span></button>
         </div>
     );
 }

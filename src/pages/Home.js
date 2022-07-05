@@ -2,6 +2,7 @@ import React from 'react';
 import ReactSplit, { SplitDirection } from '@devbookhq/splitter'
 import FloatingLabel from "react-bootstrap-floating-label";
 import "./Home.css"
+import Collapsible from './Collapsible';
 
 function Home(props) {
 
@@ -28,11 +29,11 @@ function Home(props) {
 
         setNewBlockHeader(newBlock.header)
         setNewBlockdataAddress(newBlock.dataAddress)
-        setNewBlockTimeStamp(newBlock.timestamp)
+        setNewBlockTimeStamp(newBlock.time)
         setNewBlockParentHash(newBlock.parentHash)
         setNewBlockHash(newBlock.hash)
         setNewBlockSignature(newBlock.signature)
-        setNewBlockOwnerPublicKey(newBlock.ownerPublicKey)
+        setNewBlockOwnerPublicKey(newBlock.ownerPublicKey.slice(26, newBlock.ownerPublicKey.length - 25))
         
         setHeader("")
         setAuthor("")
@@ -61,13 +62,17 @@ function Home(props) {
 
                     <div className="right-side-content">
                         <div className="block-container">
-                            <label className="new-block-labels">Header: {newBlockHeader} </label>
-                            <label className="new-block-labels">Data Address: {newBlockdataAddress} </label>
-                            <label className="new-block-labels">Timestamp: {newBlockTimeStamp} </label>
-                            <label className="new-block-labels">Parent Hash: {newBlockParentHash === '' ? "No Parent" : newBlockParentHash} </label>
-                            <label className="new-block-labels">Block Hash: {newBlockHash} </label>
-                            <label className="new-block-labels">Owner Public Key: {newBlockOwnerPublicKey} </label>
-                            <label className="new-block-labels">Signature:  {newBlockSignature}</label>
+                            { newBlockHeader && <Collapsible className='collapsible-home' header={newBlockHeader} id={newBlockHash}>
+                                <ul>
+                                    <li className='collapsible-label-home'>Hash: <mark className='block-info'>{newBlockHash}</mark></li>
+                                    <li className='collapsible-label-home'>Data Address: <mark className='block-info'>{newBlockdataAddress}</mark></li>
+                                    <li className='collapsible-label-home'>Timestamp: <mark className='block-info'>{newBlockTimeStamp}</mark></li>
+                                    {newBlockParentHash && <li className='collapsible-label-home'>Parent Hash: <mark className='block-info'>{newBlockParentHash}</mark></li>}
+                                    <li className='collapsible-label-home'>Block Hash: <mark className='block-info'>{newBlockHash}</mark></li>
+                                    <li className='collapsible-label-home'>Owner Public Key: <mark className='block-info'>{newBlockOwnerPublicKey}</mark></li>
+                                    <li className='collapsible-label-home'>Signature: <mark className='block-info'>{newBlockSignature}</mark></li>
+                                </ul>
+                            </Collapsible>}
                         </div>
                     </div>
                 </ReactSplit>

@@ -9,14 +9,15 @@ function Trace(props) {
     const [blockToTraceForm, setBlockToTraceForm] = React.useState("");
 
     function handleTraceBlockClick() {
-        setBlockToTrace(blockToTraceForm)
+        setBlockToTrace(blockToTraceForm);
+        console.log(props.blockchain.traceBlock(blockToTraceForm));
     }
 
     return (
         <div className="trace-page-container">
             <h1>Trace</h1>
             {props.blockchain.traceBlock(blockToTrace).map(data => {
-                return <Collapse header={data.block.header} id={data.block.hash} color={data.block.verified}>
+                return <Collapse header={<mark className={data.block.verified ? 'mark-trace-green' : 'mark-trace-red'}>{data.block.header}</mark>} id={data.block.hash} >
                     <ul>
                         <li className='collapsible-label'>Hash: {data.block.hash}</li>
                         <li className='collapsible-label'>Nonce: {data.block.nonce}</li>

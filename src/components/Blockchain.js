@@ -74,7 +74,7 @@ class BlockChain {
                 verified: verify,
             }
             trace.unshift(toPush)
-            block = block.parentBlock
+            block = this.getBlock(block.parentHash)
         }
         return trace
     }
