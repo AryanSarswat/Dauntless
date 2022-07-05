@@ -5,6 +5,8 @@ import "./Home.css"
 import Collapsible from './Collapsible';
 import axios from 'axios';
 
+
+
 function Home(props) {
 
     const [header, setHeader] = React.useState("")
@@ -31,16 +33,17 @@ function Home(props) {
 
         const data = new FormData();
 
+        var hash = require('object-hash');
+
+        console.log(hash(file))
+
         data.append('file', file);
 
         axios.post('http://localhost:8000/upload', data)
             .then(res => {
                 console.log('Success');
-                console.log(res.data.filename)
                 const newBlock = props.blockchain.addBlock(header, res.data.filename, parentHash, author)
 
-                console.log(newBlock)
-        
                 setNewBlockHeader(newBlock.header)
                 setNewBlockdataAddress(newBlock.dataAddress)
                 setNewBlockTimeStamp(newBlock.time)
