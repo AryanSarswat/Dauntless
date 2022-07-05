@@ -25,7 +25,7 @@ class Encryption {
         const verify = (data, signature, publicKey) => {
             const decrypt = new JSEncrypt()
             decrypt.setKey(publicKey)
-            return decrypt.verify(data, signature)
+            return decrypt.verify(data, signature, (str) => hash(str))
         }
         return verify(data, signature, publicKey)
     }

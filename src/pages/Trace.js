@@ -17,14 +17,15 @@ function Trace(props) {
         <div className="trace-page-container">
             <h1>Trace</h1>
             {props.blockchain.traceBlock(blockToTrace).map(data => {
-                return <Collapse header={<mark className={data.block.verified ? 'mark-trace-green' : 'mark-trace-red'}>{data.block.header}</mark>} id={data.block.hash} >
+                // eslint-disable-next-line
+                return <Collapse id={data.block.hash} key={data.block.hash} header={<mark  className={data.verified ? 'mark-trace-green' : 'mark-trace-red'}>{data.block.header}</mark>}>
                     <ul>
-                        <li className='collapsible-label'>Hash: {data.block.hash}</li>
-                        <li className='collapsible-label'>Nonce: {data.block.nonce}</li>
-                        <li className='collapsible-label'>Timestamp: {data.block.time}</li>
-                        {data.block.parentHash && <li className='collapsible-label'>Parent Hash: {data.block.parentHash}</li>}
-                        <li className='collapsible-label'>Data Address: {data.block.dataAddress}</li>
-                        <li className= 'collapsible-label'>Is verified: {data.verified ? "Yes" : "No"}</li>
+                        <li id={data.block.hash} key={data.block.hash} className='collapsible-label'>Hash: {data.block.hash}</li>
+                        <li id={data.block.nonce} key={data.block.nonce} className='collapsible-label'>Nonce: {data.block.nonce}</li>
+                        <li id={data.block.time} key={data.block.time} className='collapsible-label'>Timestamp: {data.block.time}</li>
+                        {data.block.parentHash && <li id={data.block.parentHash} key={data.block.parentHash} className='collapsible-label'>Parent Hash: {data.block.parentHash}</li>}
+                        <li id={data.block.dataAddress} key={data.block.dataAddress} className='collapsible-label'>Data Address: {data.block.dataAddress}</li>
+                        <li id={data.block.header} key={data.block.header} className= 'collapsible-label'>Is verified: {data.verified ? "Yes" : "No"}</li>
                     </ul>
                         </Collapse>
             } )}

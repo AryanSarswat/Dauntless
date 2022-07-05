@@ -68,7 +68,7 @@ class BlockChain {
         let block = this.getBlock(blockHash)
         let trace = []
         while (block != null) {
-            let verify = Encryption.verifySignature(this.ipfs.retrieve(block.dataAddress), block.signature, block.publicKey)
+            let verify = Encryption.verifySignature(this.ipfs.retrieve(block.dataAddress), block.signature, block.ownerPublicKey)
             const toPush = {
                 block: block,
                 verified: verify,
