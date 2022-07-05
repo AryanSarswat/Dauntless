@@ -3,6 +3,7 @@ import ReactSplit, { SplitDirection } from '@devbookhq/splitter'
 import FloatingLabel from "react-bootstrap-floating-label";
 import "./Home.css"
 import Collapsible from './Collapsible';
+import axios from 'axios';
 
 function Home(props) {
 
@@ -19,28 +20,44 @@ function Home(props) {
     const [newBlockHash, setNewBlockHash] = React.useState("")
     const [newBlockOwnerPublicKey, setNewBlockOwnerPublicKey] = React.useState("")
     const [newBlockSignature, setNewBlockSignature] = React.useState("")
+    const [file, setFile] = React.useState(null);
 
-    
-    function handleAddBlockClick() {
-
-        const newBlock = props.blockchain.addBlock(header, content, parentHash, author)
-
-        console.log(newBlock)
-
-        setNewBlockHeader(newBlock.header)
-        setNewBlockdataAddress(newBlock.dataAddress)
-        setNewBlockTimeStamp(newBlock.time)
-        setNewBlockParentHash(newBlock.parentHash)
-        setNewBlockHash(newBlock.hash)
-        setNewBlockSignature(newBlock.signature)
-        setNewBlockOwnerPublicKey(newBlock.ownerPublicKey.slice(26, newBlock.ownerPublicKey.length - 25))
-        
-        setHeader("")
-        setAuthor("")
-        setParentHash("")
-        setContent("")
+    const onInputChange = (event) => {
+        setFile(event.target.files[0]);
     }
 
+    const onSubmit = (event) => {
+        event.preventDefault();
+
+        const data = new FormData();
+
+        data.append('file', file);
+
+        axios.post('http://localhost:8000/upload', data)
+            .then(res => {
+                console.log('Success');
+                console.log(res.data.filename)
+                const newBlock = props.blockchain.addBlock(header, res.data.filename, parentHash, author)
+
+                console.log(newBlock)
+        
+                setNewBlockHeader(newBlock.header)
+                setNewBlockdataAddress(newBlock.dataAddress)
+                setNewBlockTimeStamp(newBlock.time)
+                setNewBlockParentHash(newBlock.parentHash)
+                setNewBlockHash(newBlock.hash)
+                setNewBlockSignature(newBlock.signature)
+                setNewBlockOwnerPublicKey(newBlock.ownerPublicKey.slice(26, newBlock.ownerPublicKey.length - 25))
+                
+                setHeader("")
+                setAuthor("")
+                setParentHash("")
+                setContent("")
+            })
+            .catch(error =>{
+                console.log("Error", error);
+            })
+    }
 
     return (
         <div className="home">
@@ -54,9 +71,12 @@ function Home(props) {
                             <FloatingLabel label="Author " id='author' className= 'floating-label-home' onChange={event => setAuthor(event.target.value)}/>
                             <FloatingLabel label="Parent Hash " id='hash' className= 'floating-label-home' onChange={event => event.target.value !== "" ? setParentHash(event.target.value) : null}/>
                             <FloatingLabel label="Content " id='content' className= 'floating-label-home' onChange={event => setContent(event.target.value)}/>
-
-                            <button onClick={handleAddBlockClick} className="add-block-btn"><span>Add Block</span></button>
-
+                            <form method="post" action="#" id="#" onSubmit={onSubmit}>
+                                <div className="form-group files">
+                                    <input type="file" className="form-control" id="file" multiple="" onChange={onInputChange} />
+                                </div>
+                                <button className="add-block-btn"><span>Add Block</span></button>
+                            </form>
                         </div>
                     </div>
 

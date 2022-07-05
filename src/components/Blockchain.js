@@ -65,6 +65,10 @@ class BlockChain {
             return []
         }
 
+        if (!(blockHash in this.blockMappings)) {
+            return []
+        }
+
         let block = this.getBlock(blockHash)
         let trace = []
         while (block != null) {
@@ -77,6 +81,10 @@ class BlockChain {
             block = this.getBlock(block.parentHash)
         }
         return trace
+    }
+
+    isValidHash(blockHash) {
+        return blockHash in this.blockMappings
     }
 
     static isValidProof(blockHash) {

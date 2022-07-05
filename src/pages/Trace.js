@@ -10,7 +10,9 @@ function Trace(props) {
 
     function handleTraceBlockClick() {
         setBlockToTrace(blockToTraceForm);
-        console.log(props.blockchain.traceBlock(blockToTraceForm));
+        if (!props.blockchain.isValidHash(blockToTraceForm)) {
+            alert("Invalid Block Hash");
+        }
     }
 
     return (
