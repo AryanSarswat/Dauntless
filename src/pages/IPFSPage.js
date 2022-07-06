@@ -4,6 +4,7 @@ import './IPFSPage.css'
 
 function IPFSPage(props) {
 
+    //!TODO Change to have tabs one for text based, one for image based
     const images = require.context('../../public/uploads/', true);
     const [blockToFetch, setblockToFetch] = React.useState("");
     const [blockToFetchForm, setBlockToFetchForm] = React.useState("");

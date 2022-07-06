@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css"
 
+//!TODO Add Verify Page
 function Navbar() {
   return (
     <div>
@@ -11,7 +12,6 @@ function Navbar() {
               <Link className= "link" to="/Blocks">Block Page</Link>
               <Link className= "link" to="/Trace">Trace Block</Link>
               <Link className= "link" to="/IPFS">IPFS Page</Link> 
-              //! TODO Add Verify Page
             </nav>
         </header>
     </div>
