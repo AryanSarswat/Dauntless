@@ -1,21 +1,14 @@
-.TextTab {
+.verify-text-tab {
+    padding: 10px;
     font-size: 2rem;
     text-align: center;
+    justify-content: center;
+    padding: 1.5rem 1.5rem;
+    margin: 0.5rem 0.5rem 1.25rem;
 }
 
-.text-field-TextTab {
-    width: 99%;
-    border-radius: 10px;
-    background-color: #fff;
-    padding: 80px 0px 85px 35%;
-    color: #fff;
-    font-size: 1.5em;
-    font-weight: bold;
-    margin: 5px 5px
-}
-
-.text-field-TextTab-content {
-    width: 99%;
+.text-field-verifed-textTab-content {
+    width: 100%;
     border-radius: 10px;
     background-color: #fff;
     padding: 120px 0px 85px 35%;
@@ -25,7 +18,7 @@
     margin: 20px 20px
 }
 
-.add-block-btn-TextTab {
+.add-block-btn-VerifyTextTab {
     background-color: #f4511e;
     color: #FFFFFF;
     border-radius: 10px;
@@ -36,17 +29,17 @@
     transition: all 0.75s;
     cursor: pointer;
     margin: 5px;
-    width: 87vh;
+    width: 100%;
 }
 
-.add-block-btn-TextTab span {
+.add-block-btn-VerifyTextTab span {
     cursor: pointer;
     display: inline-block;
     position: relative;
     transition: 0.5s;
 }
 
-.add-block-btn-TextTab span:after {
+.add-block-btn-VerifyTextTab span:after {
     content: '\00bb';
     position: absolute;
     opacity: 0;
@@ -55,11 +48,11 @@
     transition: 0.5s;
 }
 
-.add-block-btn-TextTab:hover span {
+.add-block-btn-VerifyTextTab:hover span {
     padding-right: 25px;
 }
   
-.add-block-btn-TextTab:hover span:after {
+.add-block-btn-VerifyTextTab:hover span:after {
     opacity: 1;
     right: 0;
 }

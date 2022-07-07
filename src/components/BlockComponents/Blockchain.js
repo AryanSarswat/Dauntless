@@ -9,16 +9,28 @@ class BlockChain {
 
     DIFFICULTY = 2;
     MAX_NONCE = 2 ** 32;
+    GENESIS_BLOCK = Block.createGenesisBlock()
 
-    constructor() {
-        this.chain = new Graph()
-        this.blockMappings = {}
-        this.encryptionThirdParty = new Encryption()
-        this.users = {}
-        this.ipfs = new IPFS()
+
+
+    constructor(old=null) {
+        if (old != null) {
+            this.chain = old.chain
+            this.blockMappings = old.blockMappings
+            this.encryptionThirdParty = old.encryptionThirdParty
+            this.users = old.users
+            this.ipfs = old.ipfs
+        } else {
+            this.chain = new Graph(this.GENESIS_BLOCK)
+            this.blockMappings = {}
+            this.encryptionThirdParty = new Encryption()
+            this.users = {}
+            this.ipfs = new IPFS()
+        }
+        this.blockMappings[this.GENESIS_BLOCK.hash] = this.GENESIS_BLOCK
     }
 
-    addBlock(header, content, parentHash, author) {
+    addBlock(header, content, contentType, parentHash, author) {
         if (!(author in this.users)) {
             this.users[author] = Encryption.generateKeyPair()
         }
@@ -26,25 +38,25 @@ class BlockChain {
         const publicKey = this.users[author]['publicKey']
         const privateKey = this.users[author]['privateKey']
         
-        const dataAddress = this.ipfs.store(content)
+        const dataAddress = this.ipfs.store(content, contentType)
 
         const signature = Encryption.signText(content, privateKey);
 
-        const newBlock = Block.createBlock(header, dataAddress, parentHash, signature, publicKey)
+        const newBlock = Block.createBlock(header, dataAddress, parentHash || this.GENESIS_BLOCK.hash, signature, publicKey)
 
-        this.mine(parentHash || null, newBlock)
+        this.mine(parentHash || this.GENESIS_BLOCK.hash, newBlock)
 
         return newBlock
     }
 
+
+    
+
     mine(parentBlockHash, newBlock) {
         for (let i = 0; i < this.MAX_NONCE; i++) {
             if (BlockChain.isValidProof(newBlock.hash)) {
-                let parentBlock = null;
-                if (parentBlockHash != null) {
-                    parentBlock = this.blockMappings[parentBlockHash]
-                    parentBlock.addChild(newBlock)
-                } 
+                let parentBlock = this.blockMappings[parentBlockHash];
+                parentBlock.addChild(newBlock)
                 this.chain.addBlock(parentBlock, newBlock)
                 this.blockMappings[newBlock.hash] = newBlock
                 break;
@@ -74,6 +86,9 @@ class BlockChain {
         let block = this.getBlock(blockHash)
         let trace = []
         while (block != null) {
+            if (block === this.GENESIS_BLOCK) {
+                break;
+            }
             let verify = Encryption.verifySignature(this.ipfs.retrieve(block.dataAddress), block.signature, block.ownerPublicKey)
             const toPush = {
                 block: block,
@@ -87,6 +102,10 @@ class BlockChain {
 
     isValidHash(blockHash) {
         return blockHash in this.blockMappings
+    }
+
+    verifyContent(content, type) {
+        return this.ipfs.verify(content, type)
     }
 
     static isValidProof(blockHash) {

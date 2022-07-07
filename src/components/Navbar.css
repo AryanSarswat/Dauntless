@@ -1,26 +1,36 @@
+.header {
+	background-color: rgb(8, 23, 37);
+	background-image: linear-gradient(to bottom, #0003, transparent);
+	border-bottom: 5px solid #0003;
+	box-shadow: 0 0 16px #0003;
+	font-size: 2em;
+	font-weight: 300;
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+}
+
 .links {
 	background-color: rgb(8, 23, 37);
 	background-image: linear-gradient(to bottom, #0003, transparent);
 	border-bottom: 2px solid #0003;
 	box-shadow: 0 0 16px #0003;
-	font-size: 2em;
-	font-weight: 300;
-	width: 100%;
-    display: flex;
+	font-size: 1em;
+	font-weight: 75;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
-.links >  .link {
+
+.link {
 	color: rgb(176, 211, 245);
-	padding: .15em;
+	padding: 2em;
 	text-decoration: none;
 	transition: all .75s;
-    text-align: center;
-	width: 50vh;
-	display: flex;
-	justify-content: space-evenly;
 }
 
-.links > .link:hover {
+.link:hover {
 	background: #033df806;
 	color: rgb(255, 0, 170);
 	opacity: 80%;

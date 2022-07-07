@@ -6,9 +6,9 @@ class IPFS {
         this.storage = {}
     }
 
-    store(content) {
+    store(content, type) {
         const dataAddress = hash(content)
-        this.storage[dataAddress] = content
+        this.storage[dataAddress] = [content, type]
         return dataAddress
     }
 
@@ -16,7 +16,19 @@ class IPFS {
         if (dataAddress in this.storage) {
             return this.storage[dataAddress]
         } else {
-            return "There is no content associated with this data address"
+            return ["There is no content associated with this data address", "text"]
+        }
+    }
+
+    verify(content, type) {
+        const dataAddress = hash(content)
+        if (dataAddress in this.storage) {
+            const storedType = this.storage[dataAddress][1]
+            if (storedType === type) {
+                return true
+            } else {
+                return false
+            }
         }
     }
 

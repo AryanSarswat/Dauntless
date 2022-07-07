@@ -1,15 +1,14 @@
 //! Add Exception Handling
 
 class Graph {
-    constructor() {
+    constructor(genesisBlock) {
         this.edgeDictionary = {};
+        this.edgeDictionary[genesisBlock.hash] = [];
         this.numberNodes = 0;
     }
 
     addBlock(parentBlock, childBlock) {
-        if (parentBlock != null) {
-            this.edgeDictionary[parentBlock.hash].push(childBlock.hash);
-        }
+        this.edgeDictionary[parentBlock.hash].push(childBlock.hash);
         this.edgeDictionary[childBlock.hash] = [];        
         this.numberNodes++;
     }

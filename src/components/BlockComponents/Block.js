@@ -44,6 +44,11 @@ class Block {
         let timestamp = new Date().getTime()
         return new Block(header, dataAddress, parentHash, signature, timestamp, ownerPublicKey, nonce, childHashes)
     }
+
+    static createGenesisBlock() {
+        let timestamp = new Date(0)
+        return new Block('Genesis Block', '0', null, null, timestamp, null, 0, [])
+    }
 }
 
 export default Block

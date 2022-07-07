@@ -1,14 +1,15 @@
 import React from "react";
-import FloatingLabel from "react-bootstrap-floating-label";
 import './ImageTab.css';
 import axios from 'axios';
+import TextField from '@material-ui/core/TextField';
+import { Grid } from "@material-ui/core";
 
 
 function ImageTab(props){
 
     const [header, setHeader] = React.useState("")
     const [author, setAuthor] = React.useState("")
-    const [parentHash, setParentHash] = React.useState("") //! TODO Change to such that genesis block is used if no parentHash is provided
+    const [parentHash, setParentHash] = React.useState("")
     const [file, setFile] = React.useState(null);
     
     const onInputChange = (event) => {
@@ -19,17 +20,12 @@ function ImageTab(props){
         event.preventDefault();
 
         const data = new FormData();
-
-        var hash = require('object-hash');
-
-        console.log(hash(file))
-
         data.append('file', file);
 
         axios.post('http://localhost:8000/upload', data)
             .then(res => {
                 console.log('Success');
-                const newBlock = props.parentProps.blockchain.addBlock(header, res.data.filename, parentHash, author)
+                const newBlock = props.parentProps.blockchain.addBlock(header, res.data.filename, 'image', parentHash, author)
 
                 props.parentProps.setNewBlockHeader(newBlock.header)
                 props.parentProps.setNewBlockdataAddress(newBlock.dataAddress)
@@ -50,17 +46,25 @@ function ImageTab(props){
 
     return (
     <div className="ImageTab">
-        <div className="form-container-ImageTab">
-            <FloatingLabel label="Header " id='header' className= 'floating-label-ImageTab' onChange={event => setHeader(event.target.value)}/>
-            <FloatingLabel label="Ministry " id='author' className= 'floating-label-ImageTab' onChange={event => setAuthor(event.target.value)}/>
-            <FloatingLabel label="Parent Hash " id='hash' className= 'floating-label-ImageTab' onChange={event => event.target.value !== "" ? setParentHash(event.target.value) : null}/>
-            <form method="post" action="#" id="#" onSubmit={onSubmit}>
-                <div className="form-group files">
-                    <input type="file" className="form-control" id="file" multiple="" onChange={onInputChange} />
-                </div>
-                <button className="add-block-btn-ImageTab"><span>Add Block</span></button>
-            </form>
-        </div>
+        <Grid container direction={"column"} spacing={2}>
+            <Grid item className="input-fields">
+                <TextField className='text-field-ImageTab' label="Header" variant="filled" onChange={event => setHeader(event.target.value)}/>
+            </Grid>
+            <Grid item className="input-fields">
+                <TextField className='text-field-ImageTab' label="Ministry" variant="filled" onChange={event => setAuthor(event.target.value)}/>
+            </Grid>
+            <Grid item className="input-fields">
+                <TextField className='text-field-ImageTab' label="Parent Hash" variant="filled" onChange={event => event.target.value !== "" ? setParentHash(event.target.value) : null}/>
+            </Grid>
+            <Grid item className="file-input">
+                <form method="post" action="#" id="#" onSubmit={onSubmit}>
+                    <div className="form-group-files">
+                        <input type="file" className="form-control-input" id="file" onChange={onInputChange} />
+                    </div>
+                    <button className="add-block-btn-ImageTab"><span>Add Block</span></button>
+                </form>
+            </Grid>
+        </Grid>
     </div>
     );
 };

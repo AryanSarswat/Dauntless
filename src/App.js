@@ -18,11 +18,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Home blockchain={blockChain} setBlockChain={setChain}/>} />
-            <Route path="/Blocks" element={<BlockPage blockchain={blockChain} setBlockChain={setChain}/>} />
-            <Route path="/Trace" element={<Trace blockchain={blockChain} setBlockChain={setChain}/>} />
-            <Route path="/IPFS" element={<IPFSPage blockchain={blockChain} setBlockChain={setChain}/>} />
-            <Route path="/Verify" element={<VerifyPage blockchain={blockChain} setBlockChain={setChain}/>} />
+            <Route index element={<Home blockchain={blockChain} setBlockChain={setChain}/>}/>
+            <Route path="/Blocks" element={<BlockPage blockchain={blockChain} setBlockChain={setChain}/>}/>
+            <Route path="/Trace" element={<Trace blockchain={blockChain} setBlockChain={setChain}/>}/>
+            <Route path="/IPFS" element={<IPFSPage blockchain={blockChain} setBlockChain={setChain}/>}/>
+            <Route path="/Verify" element={<VerifyPage blockchain={blockChain} setBlockChain={setChain}/>}/>
           </Route>
         </Routes>
       </BrowserRouter>

@@ -1,33 +1,13 @@
-.ImageTab {
+.VerifyImageTab {
+    padding: 10px;
     font-size: 2rem;
     text-align: center;
-}
-
-.input-fields{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    padding: 1.5rem 1.5rem;
+    margin: 0.5rem 0.5rem 1.25rem;
 }
 
-.text-field-ImageTab {
-    width: 99%;
-    border-radius: 10px;
-    background-color: #fff;
-    padding: 80px 0px 85px 35%;
-    color: #fff;
-    font-size: 1.5em;
-    font-weight: bold;
-    margin: 5px 5px
-}
-
-.file-input {
-    width: 100%
-}
-
-
-.form-group-files input {
+.files input {
     outline: 2px dashed #92b0b3;
     outline-offset: -10px;
     -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
@@ -35,11 +15,11 @@
     padding: 120px 0px 85px 35%;
     text-align: center !important;
     margin: 0;
-    width: 60vh !important;
+    width: 125vh !important;
     height: 1vh !important;
 }
 
-.form-group-files input:focus{     
+.files input:focus{     
     outline: 2px dashed #92b0b3;  
     outline-offset: -10px;
     -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
@@ -47,9 +27,9 @@
     border:1px solid #92b0b3;
  }
 
-.form-group-files{ position:relative}
+.files{ position:relative}
 
-.form-group-files:after {  
+.files:after {  
     pointer-events: none;
     position: absolute;
     top: 60px;
@@ -69,7 +49,7 @@
     color:inherit;
 }
 
-.form-group-files:before {
+.files:before {
     position: absolute;
     bottom: 10px;
     left: 0;  pointer-events: none;
@@ -84,7 +64,7 @@
     text-align: center;
 }
 
-.add-block-btn-ImageTab {
+.add-block-btn-VerifyImageTab {
     background-color: #f4511e;
     color: #FFFFFF;
     border-radius: 10px;
@@ -98,14 +78,14 @@
     width: 100%;
 }
 
-.add-block-btn-ImageTab span {
+.add-block-btn-VerifyImageTab span {
     cursor: pointer;
     display: inline-block;
     position: relative;
     transition: 0.5s;
 }
 
-.add-block-btn-ImageTab span:after {
+.add-block-btn-VerifyImageTab span:after {
     content: '\00bb';
     position: absolute;
     opacity: 0;
@@ -114,11 +94,11 @@
     transition: 0.5s;
 }
 
-.add-block-btn-ImageTab:hover span {
+.add-block-btn-VerifyImageTab:hover span {
     padding-right: 25px;
 }
   
-.add-block-btn-ImageTab:hover span:after {
+.add-block-btn-VerifyImageTab:hover span:after {
     opacity: 1;
     right: 0;
 }
