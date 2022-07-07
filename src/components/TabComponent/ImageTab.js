@@ -20,6 +20,7 @@ function ImageTab(props){
         event.preventDefault();
 
         const data = new FormData();
+        
         data.append('file', file);
 
         axios.post('http://localhost:8000/upload', data)

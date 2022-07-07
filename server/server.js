@@ -1,7 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const cors = require('cors');
-
+const { imageHash } = require('image-hash')
 const app = express();
 
 app.use(cors());

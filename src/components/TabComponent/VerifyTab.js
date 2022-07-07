@@ -29,7 +29,7 @@ function VerifyTab(props) {
                 </ul>
             </Grid>
             <Grid item className="VerifyOutlet">
-                {activeTab === "tab1" ? <VerifyTextTab parentProps={props.parentProps}/> : <VerifyImageTab parentProps={props}/>}
+                {activeTab === "tab1" ? <VerifyTextTab parentProps={props.parentProps}/> : <VerifyImageTab parentProps={props.parentProps}/>}
             </Grid>
         </Grid>
     );
