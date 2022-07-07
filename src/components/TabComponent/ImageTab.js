@@ -52,7 +52,7 @@ function ImageTab(props){
     <div className="ImageTab">
         <div className="form-container-ImageTab">
             <FloatingLabel label="Header " id='header' className= 'floating-label-ImageTab' onChange={event => setHeader(event.target.value)}/>
-            <FloatingLabel label="Author " id='author' className= 'floating-label-ImageTab' onChange={event => setAuthor(event.target.value)}/>
+            <FloatingLabel label="Ministry " id='author' className= 'floating-label-ImageTab' onChange={event => setAuthor(event.target.value)}/>
             <FloatingLabel label="Parent Hash " id='hash' className= 'floating-label-ImageTab' onChange={event => event.target.value !== "" ? setParentHash(event.target.value) : null}/>
             <form method="post" action="#" id="#" onSubmit={onSubmit}>
                 <div className="form-group files">

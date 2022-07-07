@@ -3,6 +3,16 @@
     text-align: center;
 }
 
+.floating-label-ImageTab {
+    position: relative;
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 20px 20px;
+    margin: 20px 20px;
+    max-width: 85vh;
+}
+
 .files input {
     outline: 2px dashed #92b0b3;
     outline-offset: -10px;
@@ -12,17 +22,7 @@
     text-align: center !important;
     margin: 0;
     width: 58vh !important;
-    height: 3vh !important;
-}
-
-.floating-label-ImageTab {
-    position: relative;
-    color: #fff;
-    font-size: 1.5em;
-    font-weight: bold;
-    padding: 20px 20px;
-    margin: 20px 20px;
-    max-width: 85vh;
+    height: 12vh !important;
 }
 
 .files input:focus{     

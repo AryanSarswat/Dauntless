@@ -19,6 +19,13 @@
     border-radius: 8px;
 }
 
+.collapsible-label-home {
+    width: 100%;
+    font-size: 0.5em;
+    font-weight: bold;
+    word-wrap: break-word;
+}
+
 
 .left-side-content {
     height: 100%;

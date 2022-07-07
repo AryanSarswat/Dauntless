@@ -32,12 +32,12 @@ function TextTab(props){
         <div className="TextTab">
             <div className="form-container-TextTab">
                 <FloatingLabel label="Header " id='header' className= 'floating-label-TextTab' onChange={event => setHeader(event.target.value)}/>
-                <FloatingLabel label="Author " id='author' className= 'floating-label-TextTab' onChange={event => setAuthor(event.target.value)}/>
+                <FloatingLabel label="Ministry " id='author' className= 'floating-label-TextTab' onChange={event => setAuthor(event.target.value)}/>
                 <FloatingLabel label="Parent Hash " id='hash' className= 'floating-label-TextTab' onChange={event => event.target.value !== "" ? setParentHash(event.target.value) : null}/>
                 <TextField id="text-field-TextTab" label="Content" 
                 className="text-field-TextTab"
                 onChange={event => setContent(event.target.value)}
-                minRows={10}
+                rows={15}
                 multiline
                 placeholder="Enter your text here"
                 variant="filled"
