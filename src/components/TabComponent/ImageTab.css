@@ -1,0 +1,115 @@
+.ImageTab {
+    font-size: 2rem;
+    text-align: center;
+}
+
+.files input {
+    outline: 2px dashed #92b0b3;
+    outline-offset: -10px;
+    -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    padding: 120px 0px 85px 35%;
+    text-align: center !important;
+    margin: 0;
+    width: 58vh !important;
+    height: 3vh !important;
+}
+
+.floating-label-ImageTab {
+    position: relative;
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 20px 20px;
+    margin: 20px 20px;
+    max-width: 85vh;
+}
+
+.files input:focus{     
+    outline: 2px dashed #92b0b3;  
+    outline-offset: -10px;
+    -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    transition: outline-offset .15s ease-in-out, background-color .15s linear; 
+    border:1px solid #92b0b3;
+ }
+
+.files{ position:relative}
+
+.files:after {  
+    pointer-events: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 60px;
+    right: 0;
+    height: 56px;
+    content: "";
+    display: block;
+    margin: 0 auto;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.color input{ 
+    background-color:inherit;
+    color:inherit;
+}
+
+.files:before {
+    position: absolute;
+    bottom: 10px;
+    left: 0;  pointer-events: none;
+    width: 100%;
+    right: 0;
+    height: 57px;
+    display: block;
+    margin: 0 auto;
+    color: inherit;
+    font-weight: 600;
+    text-transform: capitalize;
+    text-align: center;
+}
+
+.add-block-btn-ImageTab {
+    background-color: #f4511e;
+    color: #FFFFFF;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 28px;
+    padding: 30px;
+    width: 100%;
+    transition: all 0.75s;
+    cursor: pointer;
+    margin: 10px;
+    width: 87vh;
+}
+
+.add-block-btn-ImageTab span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.add-block-btn-ImageTab span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.add-block-btn-ImageTab:hover span {
+    padding-right: 25px;
+}
+  
+.add-block-btn-ImageTab:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+.form-container-ImageTab {
+    display: flex;    
+    flex-direction: column;
+}
