@@ -33,79 +33,6 @@
     font-size: 2em;
 }
 
-.form-container {
-    position: relative;
-    top: 30%;
-    left: 30%;
-    height: 100%;
-    width: 95%;
-    padding: 40px;
-    transform: translate(-30%, -30%);
-    background: rgba(0,0,0,.5);
-    box-sizing: border-box;
-    
-    box-shadow: 0 15px 25px rgba(0,0,0,.6);
-    border-radius: 10px;
-    display: run-in;
-}
-
-.form-container  h2 {
-    margin: 0 0 5;
-    padding: 0;
-    color: #fff;
-    text-align: center;
-}
-
-.floating-label-home {
-    position: relative;
-    color: #fff;
-    font-size: 1.5em;
-    font-weight: bold;
-    padding: 5px 5px;
-    margin: 5px 5px;
-    max-width: 80vh;
-}
-
-.add-block-btn {
-    border-radius: 2px;
-    background-color: #f4511e;
-    color: #FFFFFF;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 28px;
-    padding: 20px;
-    width: 100%;
-    transition: all 0.75s;
-    cursor: pointer;
-    margin: 5px;
-    width: 85vh;
-}
-
-.add-block-btn span {
-    cursor: pointer;
-    display: inline-block;
-    position: relative;
-    transition: 0.5s;
-}
-
-.add-block-btn span:after {
-    content: '\00bb';
-    position: absolute;
-    opacity: 0;
-    top: 0;
-    right: -20px;
-    transition: 0.5s;
-}
-
-.add-block-btn:hover span {
-    padding-right: 25px;
-}
-  
-.add-block-btn:hover span:after {
-    opacity: 1;
-    right: 0;
-}
-
 .right-side-content {
     height: 100%;
     width: 100%;
@@ -136,69 +63,8 @@
     justify-content: center;
 }
 
-.collapsible-label-home {
-    font-size: 0.5em;
-    font-weight: bold;
-    word-wrap: break-word;
-}
-
 .block-info {
     background-color: inherit; 
     color: white;
 }
 
-.files input {
-    outline: 2px dashed #92b0b3;
-    outline-offset: -10px;
-    -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
-    transition: outline-offset .15s ease-in-out, background-color .15s linear;
-    padding: 120px 0px 85px 35%;
-    text-align: center !important;
-    margin: 0;
-    width: 55vh !important;
-    height: 1vh !important;
-}
-
-.files input:focus{     
-    outline: 2px dashed #92b0b3;  
-    outline-offset: -10px;
-    -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
-    transition: outline-offset .15s ease-in-out, background-color .15s linear; 
-    border:1px solid #92b0b3;
- }
-
-.files{ position:relative}
-
-.files:after {  pointer-events: none;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    width: 50px;
-    right: 0;
-    height: 56px;
-    content: "";
-    display: block;
-    margin: 0 auto;
-    background-size: 100%;
-    background-repeat: no-repeat;
-}
-
-.color input{ 
-    background-color:inherit;
-    color:inherit;
-}
-
-.files:before {
-    position: absolute;
-    bottom: 10px;
-    left: 0;  pointer-events: none;
-    width: 100%;
-    right: 0;
-    height: 57px;
-    display: block;
-    margin: 0 auto;
-    color: inherit;
-    font-weight: 600;
-    text-transform: capitalize;
-    text-align: center;
-}

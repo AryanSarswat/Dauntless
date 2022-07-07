@@ -17,7 +17,7 @@
     text-align: center;
 	width: 50vh;
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-evenly;
 }
 
 .links > .link:hover {
