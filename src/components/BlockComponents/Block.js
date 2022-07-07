@@ -49,6 +49,10 @@ class Block {
         let timestamp = new Date(0)
         return new Block('Genesis Block', '0', null, null, timestamp, null, 0, [])
     }
+
+    static fromJSON(json) {
+        return new Block(json.header, json.dataAddress, json.parentHash, json.signature, json.timestamp, json.ownerPublicKey, json.nonce, json.childHashes)
+    }
 }
 
 export default Block

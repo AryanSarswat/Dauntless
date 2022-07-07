@@ -35,6 +35,12 @@ class IPFS {
     getAll() {
         return Object.entries(this.storage)
     }
+
+    static fromJSON(old) {
+        const newIPFS = new IPFS()
+        newIPFS.storage = old.storage
+        return newIPFS
+    }
 }
 
 export default IPFS;

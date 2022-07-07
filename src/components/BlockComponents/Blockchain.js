@@ -15,18 +15,17 @@ class BlockChain {
 
     constructor(old=null) {
         if (old != null) {
-            this.chain = old.chain
+            this.chain = Graph.fromJSON(old.chain)
             this.blockMappings = old.blockMappings
-            this.encryptionThirdParty = old.encryptionThirdParty
             this.users = old.users
-            this.ipfs = old.ipfs
+            this.ipfs = IPFS.fromJSON(old.ipfs)
         } else {
             this.chain = new Graph(this.GENESIS_BLOCK)
             this.blockMappings = {}
-            this.encryptionThirdParty = new Encryption()
             this.users = {}
             this.ipfs = new IPFS()
         }
+        this.encryptionThirdParty = new Encryption()
         this.blockMappings[this.GENESIS_BLOCK.hash] = this.GENESIS_BLOCK
     }
 

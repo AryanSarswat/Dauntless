@@ -11,8 +11,12 @@ import VerifyPage from './pages/VerifyPage.js';
 
 
 function App() {
+    
+    let [blockChain, setChain] = React.useState(localStorage.getItem('blockChain') ? new BlockChain(JSON.parse(localStorage.getItem('blockChain'))) : new BlockChain());
 
-    let [blockChain, setChain] = React.useState(new BlockChain())
+    React.useEffect(() => {
+      localStorage.setItem('blockChain', JSON.stringify(blockChain))
+    }, [blockChain])
 
     return (
       <BrowserRouter>
