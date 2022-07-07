@@ -32,16 +32,16 @@ function TextTab(props){
         <div className="TextTab">
             <Grid container direction={"column"} spacing={2}>
                 <Grid item>
-                    <TextField id="text-field-TextTab" className='text-field-TextTab' label="Header" variant="filled" onChange={event => setHeader(event.target.value)}/>
+                    <TextField id="text-field-TextTab" value={header} className='text-field-TextTab' label="Header" variant="filled" onChange={event => setHeader(event.target.value)}/>
                 </Grid>
                 <Grid item>
-                    <TextField id="text-field-TextTab" className='text-field-TextTab' label="Ministry" variant="filled" onChange={event => setAuthor(event.target.value)}/>
+                    <TextField id="text-field-TextTab" value={author} className='text-field-TextTab' label="Ministry" variant="filled" onChange={event => setAuthor(event.target.value)}/>
                 </Grid>
                 <Grid item>
-                    <TextField id="text-field-TextTab" className='text-field-TextTab' label="Parent Hash" variant="filled" onChange={event => event.target.value !== "" ? setParentHash(event.target.value) : null}/>
+                    <TextField id="text-field-TextTab" value={parentHash} className='text-field-TextTab' label="Parent Hash" variant="filled" onChange={event => event.target.value !== "" ? setParentHash(event.target.value) : null}/>
                 </Grid>
                 <Grid item>
-                    <TextField id="text-field-TextTab" className='text-field-TextTab-content' label="Content" onChange={event => setContent(event.target.value)}
+                    <TextField id="text-field-TextTab" value={content} className='text-field-TextTab-content' label="Content" onChange={event => setContent(event.target.value)}
                     minRows={9}
                     maxRows={9}
                     multiline

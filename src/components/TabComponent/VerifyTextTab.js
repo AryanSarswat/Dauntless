@@ -12,6 +12,8 @@ function TextTab(props){
 
         const [toCheck, type] = [content, 'text']
         setVerified(props.parentProps.blockchain.verifyContent(toCheck, type))
+        
+        
         setContent("")
     }
 
@@ -19,7 +21,7 @@ function TextTab(props){
         <div className="verify-text-tab">
             <Grid container direction={"column"} spacing={2}>
                 <Grid item>
-                <TextField className='text-field-verifed-textTab-content' id='content' label="Content" onChange={event => setContent(event.target.value)}
+                <TextField className='text-field-verifed-textTab-content' id='content' label="Content" value={content} onChange={event => setContent(event.target.value)}
                     minRows={15}
                     maxRows={15}
                     multiline
