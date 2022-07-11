@@ -1,11 +1,19 @@
 {
+    "version": "0.2.0",
     "configurations": [
         {
-            "type": "pwa-chrome",
-            "name": "http://localhost:3000",
+            "name": "Flask",
+            "type": "python",
             "request": "launch",
-            "url": "http://localhost:3000",
-            "webRoot": "${workspaceFolder}",
+            "stopOnEntry": false,
+            "program": "${workspaceRoot}/server/backend.py",
+            "env": {
+                "FLASK_APP": "${workspaceRoot}/server/backend.py"
+            },
+            "args": [
+                "run"
+            ],
+            "envFile": "${workspaceFolder}/venv",
         }
     ]
 }

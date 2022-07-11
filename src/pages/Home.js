@@ -31,6 +31,7 @@ function Home(props) {
                             setNewBlockSignature={setNewBlockSignature}
                             blockchain={props.blockchain}
                         />
+
                     </div>
 
                     <div className="right-side-content">

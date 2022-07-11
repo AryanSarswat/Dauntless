@@ -2,6 +2,7 @@ import React from "react";
 import './TextTab.css';
 import TextField from '@material-ui/core/TextField';
 import { Grid } from "@material-ui/core";
+import APIService from "../services/APIService";
 
 function TextTab(props){
     const [header, setHeader] = React.useState("")
@@ -9,18 +10,22 @@ function TextTab(props){
     const [parentHash, setParentHash] = React.useState("")
     const [content, setContent] = React.useState("")
 
+
     const onSubmit = (event) => {
         event.preventDefault();
-
-        const newBlock = props.parentProps.blockchain.addBlock(header, content, 'text', parentHash, author)
-
-        props.parentProps.setNewBlockHeader(newBlock.header)
-        props.parentProps.setNewBlockdataAddress(newBlock.dataAddress)
-        props.parentProps.setNewBlockTimeStamp(newBlock.time)
-        props.parentProps.setNewBlockParentHash(newBlock.parentHash)
-        props.parentProps.setNewBlockHash(newBlock.hash)
-        props.parentProps.setNewBlockSignature(newBlock.signature)
-        props.parentProps.setNewBlockOwnerPublicKey(newBlock.ownerPublicKey.slice(26, newBlock.ownerPublicKey.length - 25))
+        
+        APIService.addBlock(header, content, "text", parentHash, author)
+        .then((response) => response.json())
+        .then((data) => {
+                props.parentProps.setNewBlockHeader(data['header'])
+                props.parentProps.setNewBlockdataAddress(data['data_address'])
+                props.parentProps.setNewBlockTimeStamp(data['timestamp'])
+                props.parentProps.setNewBlockParentHash(data['parent_hash'])
+                props.parentProps.setNewBlockHash(data['hash'])
+                props.parentProps.setNewBlockSignature(data['owner_signature'])
+                props.parentProps.setNewBlockOwnerPublicKey(data['owner_public_key'])
+            }
+        )
 
         setHeader("")
         setAuthor("")

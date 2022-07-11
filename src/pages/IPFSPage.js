@@ -2,6 +2,7 @@ import { Grid } from '@material-ui/core';
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import './IPFSPage.css'
+import APIService from '../components/services/APIService';
 
 function IPFSPage(props) {
 
@@ -11,8 +12,11 @@ function IPFSPage(props) {
     const [blockToFetchForm, setBlockToFetchForm] = React.useState("");
 
     function handleFetchData() {
-        const content = props.blockchain.ipfs.retrieve(blockToFetchForm)
-        setblockToFetch(content)
+        APIService.fetchData(blockToFetchForm)
+        .then((response) => response.json())
+        .then((data) => {
+            setblockToFetch(data['data'])
+        })
     }
 
     return (

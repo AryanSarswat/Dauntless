@@ -2,7 +2,6 @@ import './App.css';
 import React from 'react';
 import {BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
-import BlockChain from './components/BlockComponents/Blockchain.js';
 import BlockPage from './pages/BlockPage.js';
 import Home from './pages/Home.js';
 import IPFSPage from './pages/IPFSPage.js'
@@ -12,10 +11,16 @@ import VerifyPage from './pages/VerifyPage.js';
 
 function App() {
     
-    let [blockChain, setChain] = React.useState(localStorage.getItem('blockChain') ? new BlockChain(JSON.parse(localStorage.getItem('blockChain'))) : new BlockChain());
+    let [blockChain, setChain] = React.useState("");
 
     React.useEffect(() => {
-      localStorage.setItem('blockChain', JSON.stringify(blockChain))
+        fetch("/")
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            setChain(data)
+        })
+        .catch(err => console.log(err))
     }, [blockChain])
 
     return (
