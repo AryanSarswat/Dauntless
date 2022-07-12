@@ -5,6 +5,11 @@ from tqdm import tqdm
 from .Block import *
 from .Graph import *
 
+class BlockIsNotFoundError(Exception):
+    def __init__(self, message):
+        self.message = message
+        super().__init__(self.message)
+
 class ParentDoesNotContainCHildError(Exception):
         def __init__(self):
             self.message = f"The child block points to the parent block which does not contain the child block"
@@ -65,6 +70,20 @@ class Blockchain:
             Block: Block to be retrieved
         """
         return self.blockMappings[block_hash]
+    
+    def getBlockFromDataAddress(self, data_address: str) -> Block:
+        """Returns block from provided data address
+
+        Args:
+            data_address (str): data address of the block to retrieve
+
+        Returns:
+            Block: Block to be retrieved
+        """
+        for key, block in self.blockMappings.items():
+            if block.data_address == data_address:
+                return block
+        raise BlockIsNotFoundError("Block is not found but is in IPFS")
     
     def traceBlock(self, blockHash: str) -> list[Block]:
         """traces the block to the genesis block

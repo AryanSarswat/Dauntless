@@ -67,3 +67,12 @@ class ModelManager():
             blockVeracity.append((block, trust))
         
         return blockVeracity
+    
+    def verifyInformation(self, information) -> bool:
+        isInIPFS = self.IPFS.isInIPFS(information)
+        if isInIPFS:
+            textDataAddress = self.IPFS.getDataAddress(information)
+            isVerified = self.blockchain.getBlockFromDataAddress(textDataAddress)
+            return isVerified is not None
+        else:
+            return False

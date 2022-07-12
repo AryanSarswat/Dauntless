@@ -25,7 +25,6 @@ class IPFS:
             print("No IPFS data found")
             return dict()
             
-            
     def getText(self, hash):
         try:
             return self.storage[hash]
@@ -39,6 +38,18 @@ class IPFS:
         hash = temp_hash.digest().hex()
         self.storage[hash] = (text, type)
         return hash
+    
+    def isInIPFS(self, text):
+        for value, type in self.storage.values():
+            if value == text:
+                return True
+        return False
+    
+    def getDataAddress(self, text):
+        for key, value in self.storage.items():
+            if value[0] == text:
+                return key
+        return None
 
 
 if __name__ == '__main__':

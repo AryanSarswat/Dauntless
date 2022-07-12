@@ -27,4 +27,9 @@ export default class APIService {
         return fetch(`/traceBlock/${blockHash}`)
         .catch(error => console.error('Error:', error))
     }
+
+    static verifyInformation(information) {
+        return fetch(`/verifyInformation/${information}`)
+        .catch(error => console.error('Error:', error))
+    }
 };

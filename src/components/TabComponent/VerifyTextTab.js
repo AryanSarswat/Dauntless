@@ -2,6 +2,7 @@ import React from "react";
 import './VerifyTextTab.css';
 import TextField from '@material-ui/core/TextField';
 import { Grid } from "@material-ui/core";
+import APIService from "../services/APIService";
 
 function TextTab(props){
     const [content, setContent] = React.useState("")
@@ -10,10 +11,11 @@ function TextTab(props){
     const onSubmit = (event) => {
         event.preventDefault();
 
-        const [toCheck, type] = [content, 'text']
-        setVerified(props.parentProps.blockchain.verifyContent(toCheck, type))
-        
-        
+        APIService.verifyInformation(content)
+        .then(response => response.json())
+        .then(data => {
+            setVerified(data['verified'])
+        })
         setContent("")
     }
 

@@ -46,5 +46,10 @@ def trace_block(blockHash: str):
     history = [(block[0].toDict(), block[1]) for block in history]
     return jsonify(history)
 
+@app.route('/verifyInformation/<information>', methods=['GET'])
+def verifyInformation(information):
+    isTrue = model.verifyInformation(information)
+    return jsonify({'verified': isTrue})
+
 
 app.run()
