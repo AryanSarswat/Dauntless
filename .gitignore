@@ -4,9 +4,11 @@
 /node_modules
 /.pnp
 .pnp.js
-/public/uploads/*
+/server/storage/*
 
-!/public/uploads/base.txt
+
+
+!/server/storage/base.txt
 
 # testing
 /coverage
