@@ -24,7 +24,7 @@ class ModelManager():
         if author not in self.users:
             self.addUser(author)
         
-        data_address = self.IPFS.store(text)
+        data_address = self.IPFS.store(text, type)
         data_address_hash, signature = self.users[author].sign(data_address)
         publicKey = self.users[author].getPublicKey()
         

@@ -15,7 +15,7 @@ function IPFSPage(props) {
         APIService.fetchData(blockToFetchForm)
         .then((response) => response.json())
         .then((data) => {
-            setblockToFetch(data['data'])
+            setblockToFetch(data)
         })
     }
 
@@ -27,7 +27,7 @@ function IPFSPage(props) {
                 </Grid>
                 {blockToFetch && 
                 <Grid item className='content-container'>
-                    {blockToFetch[1] === 'text' ? <p>{blockToFetch[0]}</p> : <img className='blockImage' src={images(`./${blockToFetch[0]}`)} alt=""/>}
+                    {blockToFetch['type'] === 'text' ? <p>{blockToFetch['data']}</p> : <img className='blockImage' src={images(`./${blockToFetch['data']}`)} alt=""/>}
                 </Grid>
                 }
                 <Grid item>

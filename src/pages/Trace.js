@@ -1,33 +1,36 @@
 import React from 'react';
 import Collapse from './Collapsible';
 import FloatingLabel from "react-bootstrap-floating-label";
+import APIService from '../components/services/APIService';
 import './Trace.css'
 
 function Trace(props) {
 
-    const [blockToTrace, setBlockToTrace] = React.useState("");
+    const [traceHistory, setTraceHistory] = React.useState([]);
     const [blockToTraceForm, setBlockToTraceForm] = React.useState("");
 
     function handleTraceBlockClick() {
-        setBlockToTrace(blockToTraceForm);
-        if (!props.blockchain.isValidHash(blockToTraceForm)) {
-            alert("Invalid Block Hash");
-        }
+        APIService.traceBlock(blockToTraceForm)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data)
+            setTraceHistory(data)
+        })
     }
 
     return (
         <div className="trace-page-container">
             <h1>Trace</h1>
-            {props.blockchain.traceBlock(blockToTrace).map(data => {
+            {traceHistory.map(data => {
                 // eslint-disable-next-line
-                return <Collapse id={data.block.hash} key={data.block.hash} header={<mark  className={data.verified ? 'mark-trace-green' : 'mark-trace-red'}>{data.block.header}</mark>}>
+                return <Collapse id={data[0]['header']} key={data[0]['hash']} header={<mark  className={data[1] ? 'mark-trace-green' : 'mark-trace-red'}>{data[0]['header']}</mark>}>
                     <ul>
-                        <li id={data.block.hash} key={data.block.hash} className='collapsible-label'>Hash: {data.block.hash}</li>
-                        <li id={data.block.nonce} key={data.block.nonce} className='collapsible-label'>Nonce: {data.block.nonce}</li>
-                        <li id={data.block.time} key={data.block.time} className='collapsible-label'>Timestamp: {data.block.time}</li>
-                        {data.block.parentHash && <li id={data.block.parentHash} key={data.block.parentHash} className='collapsible-label'>Parent Hash: {data.block.parentHash}</li>}
-                        <li id={data.block.dataAddress} key={data.block.dataAddress} className='collapsible-label'>Data Address: {data.block.dataAddress}</li>
-                        <li id={data.block.header} key={data.block.header} className= 'collapsible-label'>Is verified: {data.verified ? "Yes" : "No"}</li>
+                        <li id={data[0]['hash']} key={data[0]['hash']} className='collapsible-label'>Hash: {data[0]['hash']}</li>
+                        <li id={data[0]['nonce']} key={data[0]['nonce']} className='collapsible-label'>Nonce: {data[0]['nonce']}</li>
+                        <li id={data[0]['timestamp']} key={data[0]['timestamp']} className='collapsible-label'>Timestamp: {data[0]['timestamp']}</li>
+                        {data[0]['parent_hash'] && <li id={data[0]['parent_hash']} key={data[0]['parent_hash']} className='collapsible-label'>Parent Hash: {data[0]['parent_hash']}</li>}
+                        <li id={data[0]['data_address']} key={data[0]['data_address']} className='collapsible-label'>Data Address: {data[0]['data_address']}</li>
+                        <li id={data[0]['header']} key={data[0]['header']} className= 'collapsible-label'>Is verified: {data[1] ? "Yes" : "No"}</li>
                     </ul>
                         </Collapse>
             } )}

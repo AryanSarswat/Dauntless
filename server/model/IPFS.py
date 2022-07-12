@@ -32,12 +32,12 @@ class IPFS:
         except KeyError:
             return "No text matching the given hash found"
     
-    def store(self, text):
+    def store(self, text, type):
         temp_hash = hashlib.sha256()
         # Hash of block is computed using the following properties
         temp_hash.update(text.encode('utf-8'))
         hash = temp_hash.digest().hex()
-        self.storage[hash] = text
+        self.storage[hash] = (text, type)
         return hash
 
 

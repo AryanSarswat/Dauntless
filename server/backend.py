@@ -15,11 +15,11 @@ model = ModelManager()
 def get_root():
     return jsonify({'message': 'Hello World!'})
 
-
 @app.route('/getData/<dataAddress>', methods=['GET'])
 def get_data_from_address(dataAddress):
     data = model.getDataFromIPFS(dataAddress)
-    return jsonify({'data': data})
+    return jsonify({'data': data[0],
+                    'type': data[1]})
 
 @app.route('/getBlocks', methods=['GET'])
 def get_data():
@@ -39,6 +39,12 @@ def add_data():
     newBlock = model.addBlock(header, content, author, type, parentHash)
     newBlockJSON = newBlock.toDict()
     return jsonify(newBlockJSON)
+
+@app.route('/traceBlock/<blockHash>', methods=['GET'])
+def trace_block(blockHash: str):
+    history = model.verifyVeracity(blockHash)
+    history = [(block[0].toDict(), block[1]) for block in history]
+    return jsonify(history)
 
 
 app.run()

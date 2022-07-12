@@ -22,4 +22,9 @@ export default class APIService {
         return fetch(`/getData/${dataAddress}`)
         .catch(error => console.error('Error:', error))
     }
+
+    static traceBlock(blockHash) {
+        return fetch(`/traceBlock/${blockHash}`)
+        .catch(error => console.error('Error:', error))
+    }
 };

@@ -17,7 +17,6 @@ function App() {
         fetch("/")
         .then(res => res.json())
         .then(data => {
-            console.log(data)
             setChain(data)
         })
         .catch(err => console.log(err))

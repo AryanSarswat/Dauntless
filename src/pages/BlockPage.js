@@ -10,7 +10,6 @@ function BlockPage(props) {
         fetch('/getBlocks')
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 setBlocks(data)})
     }, [])
 
