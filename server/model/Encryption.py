@@ -1,7 +1,6 @@
 from __future__ import annotations
 from Crypto.PublicKey import RSA
 from hashlib import sha512
-
 from .IPFS import *
 
 
@@ -13,6 +12,11 @@ class TextSignature:
         self.owner = owner
         
     def getPublicKey(self) -> tuple[bytes, int]:
+        """Returns the public key of the signature authority
+
+        Returns:
+            tuple[bytes, int]: tuple contain the public key
+        """
         return (hex(self.keyPair.e), self.keyPair.n)
 
     def sign(self, message: str) -> list[str]:
@@ -55,7 +59,15 @@ class TextSignature:
         return (self.keyPair.d, self.keyPair.e, self.keyPair.n)
     
     @staticmethod
-    def fromDict(jsonVal: tuple):
+    def fromDict(jsonVal: tuple) -> dict:
+        """Creates a dictionary mapping the author to the TextSignature object
+
+        Args:
+            jsonVal (tuple): json dictionary containing TextSignature attributes and author name
+
+        Returns:
+            dict: dictionary mapping the author to the TextSignature object
+        """
         dictionary = dict()
         for key, value in jsonVal.items():
             d, e, n = value
