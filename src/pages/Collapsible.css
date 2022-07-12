@@ -18,6 +18,7 @@
     height: auto;
     width: 700px;
     overflow: hidden;
+    overflow-wrap: break-word;
 }
 
 .collapsible .content-parent {

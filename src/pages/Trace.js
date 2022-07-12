@@ -1,6 +1,7 @@
 import React from 'react';
+import { Grid } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
 import Collapse from './Collapsible';
-import FloatingLabel from "react-bootstrap-floating-label";
 import APIService from '../components/services/APIService';
 import './Trace.css'
 
@@ -19,9 +20,12 @@ function Trace(props) {
     }
 
     return (
-        <div className="trace-page-container">
-            <h1>Trace</h1>
-            {traceHistory.map(data => {
+        <Grid className='traceGrid' container direction={"column"} spacing={2}>
+            <Grid item>
+                <h1>Trace Block</h1>
+            </Grid>
+            <Grid item>
+                {traceHistory.map(data => {
                 // eslint-disable-next-line
                 return <Collapse id={data[0]['header']} key={data[0]['hash']} header={<mark  className={data[1] ? 'mark-trace-green' : 'mark-trace-red'}>{data[0]['header']}</mark>}>
                     <ul>
@@ -33,10 +37,15 @@ function Trace(props) {
                         <li id={data[0]['header']} key={data[0]['header']} className= 'collapsible-label'>Is verified: {data[1] ? "Yes" : "No"}</li>
                     </ul>
                         </Collapse>
-            } )}
-            <FloatingLabel label="Block To Trace " id='block-trace' className= 'floating-label' onChange={(event) => setBlockToTraceForm(event.target.value)}/>
-            <button onClick={handleTraceBlockClick} className="trace-block-btn"><span>Trace Block</span></button>
-        </div>
+                })}
+            </Grid>
+            <Grid item>
+                <TextField id="blockToTrace" className='block-trace' label="Block To Trace" variant="filled" onChange={event => setBlockToTraceForm(event.target.value)}/>
+            </Grid>
+            <Grid item>
+                <button   button onClick={handleTraceBlockClick} className="trace-block-btn"><span>Trace Block</span></button>
+            </Grid>
+        </Grid>
     );
 }
 

@@ -55,5 +55,4 @@ def verifyInformation():
     isTrue = model.verifyInformation(information)
     return jsonify({'verified': isTrue})
 
-
 app.run()

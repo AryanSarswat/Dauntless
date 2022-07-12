@@ -114,7 +114,7 @@ class Block:
         """
         return Block(header, data_address, data_address_hash,
                  parent_hash, signature, owner_public_key, type, 
-                 nonce=0, timestamp=datetime.datetime.now(), hash=None, child_hashes=[], type=type)
+                 nonce=0, timestamp=datetime.datetime.now(), hash=None, child_hashes=[])
     
     @staticmethod
     def fromDict(json_dict: dict):
