@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
 from model.Model import ModelManager
+import chardet
 
 
 app = Flask(__name__)
@@ -30,7 +31,6 @@ def get_data():
 @app.route('/addBlock', methods=['POST'])
 def add_data():
     data = request.get_json()
-    print(data)
     header = data['header']
     content = data['content']
     type = data['type']
@@ -46,8 +46,10 @@ def trace_block(blockHash: str):
     history = [(block[0].toDict(), block[1]) for block in history]
     return jsonify(history)
 
-@app.route('/verifyInformation/<information>', methods=['GET'])
-def verifyInformation(information):
+@app.route('/verifyInformation', methods=['POST'])
+def verifyInformation():
+    data = request.get_json()
+    information = data['information']
     isTrue = model.verifyInformation(information)
     return jsonify({'verified': isTrue})
 

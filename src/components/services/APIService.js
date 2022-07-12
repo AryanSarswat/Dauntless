@@ -1,5 +1,6 @@
 export default class APIService {
     static addBlock(header, content, type, parentHash, author) {
+        
         const newBlock = {
             header: header,
             content: content,
@@ -29,7 +30,17 @@ export default class APIService {
     }
 
     static verifyInformation(information) {
-        return fetch(`/verifyInformation/${information}`)
+        const toVerify = {
+            information: information
+        }
+
+        return fetch('verifyInformation', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(toVerify)
+        })
         .catch(error => console.error('Error:', error))
     }
 };

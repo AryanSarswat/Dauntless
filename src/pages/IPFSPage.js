@@ -7,7 +7,6 @@ import APIService from '../components/services/APIService';
 function IPFSPage(props) {
 
     //!TODO Change to have tabs one for text based, one for image based
-    const images = require.context('../../public/uploads/', true);
     const [blockToFetch, setblockToFetch] = React.useState("");
     const [blockToFetchForm, setBlockToFetchForm] = React.useState("");
 
@@ -17,6 +16,7 @@ function IPFSPage(props) {
         .then((data) => {
             setblockToFetch(data)
         })
+        .catch((error) => setblockToFetch({data: "Error fetching data", type: "text"}))
     }
 
     return (
@@ -27,7 +27,7 @@ function IPFSPage(props) {
                 </Grid>
                 {blockToFetch && 
                 <Grid item className='content-container'>
-                    {blockToFetch['type'] === 'text' ? <p>{blockToFetch['data']}</p> : <img className='blockImage' src={images(`./${blockToFetch['data']}`)} alt=""/>}
+                    {blockToFetch['type'] === 'text' ? <p>{blockToFetch['data']}</p> : <img className='blockImage' src={blockToFetch['data']} alt=""/>}
                 </Grid>
                 }
                 <Grid item>

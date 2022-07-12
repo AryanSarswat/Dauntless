@@ -1,6 +1,7 @@
 import React from "react";
 import './VerifyImageTab.css';
 import { Grid } from "@material-ui/core";
+import APIService from "../services/APIService";
 
 function ImageTab(props){
 
@@ -11,32 +12,44 @@ function ImageTab(props){
         setFile(event.target.files[0]);
     }
 
+    const toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    })
+
     const onClick = (event) => {
         event.preventDefault();
 
-        const fileName = file.name;
-
-        const arr = props.parentProps.blockchain.ipfs.getAll()
-
-        for (const item of arr) {
-            if (item[1][0].slice(14, item[1][0].length) === fileName) {
-                setVerified(true)
-                return
+        toBase64(file)
+        .then(base64 => {
+            console.log(base64)
+            APIService.verifyInformation(base64)
+            .then(verified => verified.json())
+            .then(data => {
+                console.log(data)
+                setVerified(data['verified'])
+                setFile(null)
+            })
+        })
+        .catch(error => {
+            if (error.name === "TypeError") {
+                alert("Please re-upload the file");
             }
-        }
-        
+        })
     }
 
     return (
     <div className="VerifyImageTab">
         <Grid container direction={"column"} spacing={2}>
                 <Grid item>
-                    <form method="post" action="#" id="#" onSubmit={onClick}>
+                    <form method="post" action="#" id="#">
                         <div className="verify-form-group files">
                             <input type="file" className="verify-form-control" id="file" onChange={onInputChange} />
                         </div>
                         <Grid item>
-                            <button className="add-block-btn-VerifyImageTab"><span>Verify Content</span></button>
+                            <button className="add-block-btn-VerifyImageTab" onClick={onClick}><span>Verify Content</span></button>
                         </Grid>
                     </form>
                 </Grid>

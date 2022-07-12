@@ -1,6 +1,6 @@
 import React from "react";
 import './ImageTab.css';
-import axios from 'axios';
+import APIService from "../services/APIService";
 import TextField from '@material-ui/core/TextField';
 import { Grid } from "@material-ui/core";
 
@@ -11,6 +11,13 @@ function ImageTab(props){
     const [author, setAuthor] = React.useState("")
     const [parentHash, setParentHash] = React.useState("")
     const [file, setFile] = React.useState(null);
+
+    const toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    })
     
     const onInputChange = (event) => {
         setFile(event.target.files[0]);
@@ -18,31 +25,21 @@ function ImageTab(props){
 
     const onSubmit = (event) => {
         event.preventDefault();
-
-        const data = new FormData();
-        
-        data.append('file', file);
-
-        axios.post('http://localhost:8000/upload', data)
-            .then(res => {
-                console.log('Success');
-                const newBlock = props.parentProps.blockchain.addBlock(header, res.data.filename, 'image', parentHash, author)
-
-                props.parentProps.setNewBlockHeader(newBlock.header)
-                props.parentProps.setNewBlockdataAddress(newBlock.dataAddress)
-                props.parentProps.setNewBlockTimeStamp(newBlock.time)
-                props.parentProps.setNewBlockParentHash(newBlock.parentHash)
-                props.parentProps.setNewBlockHash(newBlock.hash)
-                props.parentProps.setNewBlockSignature(newBlock.signature)
-                props.parentProps.setNewBlockOwnerPublicKey(newBlock.ownerPublicKey.slice(26, newBlock.ownerPublicKey.length - 25))
-                
-                setHeader("")
-                setAuthor("")
-                setParentHash("")
-            })
-            .catch(error =>{
-                console.log("Error", error);
-            })
+        toBase64(file)
+        .then(base64 => {
+            APIService.addBlock(header, base64, "image", parentHash, author)
+            .then((response) => response.json())
+            .then((data) => {
+                    props.parentProps.setNewBlockHeader(data['header'])
+                    props.parentProps.setNewBlockdataAddress(data['data_address'])
+                    props.parentProps.setNewBlockTimeStamp(data['timestamp'])
+                    props.parentProps.setNewBlockParentHash(data['parent_hash'])
+                    props.parentProps.setNewBlockHash(data['hash'])
+                    props.parentProps.setNewBlockSignature(data['owner_signature'])
+                    props.parentProps.setNewBlockOwnerPublicKey(data['owner_public_key'])
+                }
+            )
+        })
     }
 
     return (

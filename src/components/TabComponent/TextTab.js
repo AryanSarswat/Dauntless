@@ -13,7 +13,7 @@ function TextTab(props){
 
     const onSubmit = (event) => {
         event.preventDefault();
-        
+
         APIService.addBlock(header, content, "text", parentHash, author)
         .then((response) => response.json())
         .then((data) => {
