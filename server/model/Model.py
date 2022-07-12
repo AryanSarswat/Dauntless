@@ -7,12 +7,13 @@ import json
 import os
 
 class ModelManager():
+    """Class to encapsulate the Blockchain, IPFS and Encryption"""
     def __init__(self) -> None:
         self.users = dict()
         self.blockchain = Blockchain()
         self.IPFS = IPFS()
                 
-    def addUser(self, user) -> None:
+    def addUser(self, user: str) -> None:
         self.users[user] = TextSignature(user)
         
     def getBlocks(self) -> list[Block]:
@@ -21,7 +22,7 @@ class ModelManager():
     def getDataFromIPFS(self, data_address: str) -> str:
         return self.IPFS.getText(data_address)
         
-    def addBlock(self, header, text, author, type, parentBlockHash) -> None:
+    def addBlock(self, header: str, text: str, author: str, type: str, parentBlockHash: str) -> None:
         if author not in self.users:
             self.addUser(author)
         
@@ -54,6 +55,14 @@ class ModelManager():
             pass
         
     def verifyVeracity(self, blockHash: str) -> list[tuple]:
+        """Verifies the veracity of the given block and return the trace history
+
+        Args:
+            blockHash (str): hash of the block to verify
+
+        Returns:
+            list[tuple]: list of tuples containing the block and the verification result
+        """
         history = self.blockchain.traceBlock(blockHash)
         blockVeracity = []
         for block in history:
@@ -72,6 +81,14 @@ class ModelManager():
         return blockVeracity
     
     def verifyInformation(self, information) -> bool:
+        """Verifies whether the given information is present in the Blockchain
+
+        Args:
+            information (str): information to verify
+
+        Returns:
+            bool: True if the information is present in the Blockchain, False otherwise
+        """
         isInIPFS = self.IPFS.isInIPFS(information)
         if isInIPFS:
             textDataAddress = self.IPFS.getDataAddress(information)
