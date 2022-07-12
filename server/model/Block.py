@@ -11,8 +11,9 @@ class HashNotComputedError(Exception):
 
 class Block:
     def __init__(self, header: str, data_address: str, data_address_hash: str,
-                 parent_hash: str, signature: str, owner_public_key: tuple, 
-                 nonce=0, timestamp=datetime.datetime.now(), hash=None, child_hashes=[], type='img') -> None:
+                 parent_hash: str, signature: str, owner_public_key: tuple, type: str,
+                 nonce=0, timestamp=datetime.datetime.now(), hash=None, child_hashes=[]) -> None:
+        
         # Metadata information for the block
         self.header = header
         self.data_address = data_address
@@ -67,7 +68,7 @@ class Block:
             raise HashNotComputedError()
 
     def toDict(self) -> dict:
-        """Converts this object to a dictionary
+        """Converts this object to a dictionary for conversion to JSON
         Returns:
             dict: dictionary with this object's attributes
         """
@@ -75,6 +76,7 @@ class Block:
         d['header'] = self.header
         d['data_address'] = self.data_address
         d['timestamp'] = self.timestamp.__str__()
+        d['type'] = self.type
         if self.parent_hash is not None:
             d['parent_hash'] = self.parent_hash
         else:
@@ -111,7 +113,7 @@ class Block:
             Block: New block
         """
         return Block(header, data_address, data_address_hash,
-                 parent_hash, signature, owner_public_key, 
+                 parent_hash, signature, owner_public_key, type, 
                  nonce=0, timestamp=datetime.datetime.now(), hash=None, child_hashes=[], type=type)
     
     @staticmethod
@@ -128,15 +130,24 @@ class Block:
         timestamp = datetime.datetime.strptime(json_dict['timestamp'], "%Y-%m-%d %H:%M:%S.%f")
         owner_signature = json_dict['owner_signature']
         owner_public_key = json_dict['owner_public_key'], json_dict['n']
+        type = json_dict['type']
         nonce = json_dict['nonce']
         hash = json_dict['hash']
         child_hashes = json_dict['child_hashes']
         data_address_hash = json_dict['data_address_hash']
-        return Block(header, data_address, data_address_hash, parent_hash, owner_signature, owner_public_key, 
+        return Block(header, data_address, data_address_hash, parent_hash, owner_signature, owner_public_key, type, 
                      nonce=nonce, timestamp=timestamp, hash=hash, child_hashes=child_hashes)
 
     @staticmethod
     def loadBlocks(filename: str) -> list[Block]:
+        """Load blocks from storage
+
+        Args:
+            filename (str): path to folder containing the Block.json file
+
+        Returns:
+            list[Block]: list of blocks stored in the Block.json file
+        """
         filename = os.path.join(filename, 'Blocks.json')
         try:
             with open(filename, 'r') as file:
@@ -148,6 +159,12 @@ class Block:
 
     @staticmethod
     def storeBlocks(blocks: list[Block], filename: str) -> None:
+        """Stores blocks to a file named Block.json in the path provided
+
+        Args:
+            blocks (list[Block]): list of blocks to store
+            filename (str): path of folder to store the Block.json file
+        """
         filename = os.path.join(filename, 'Blocks.json')
         with open(filename, 'w') as file:
             toWrite = json.dumps(blocks, default=lambda o: o.toDict(), indent = 4)
