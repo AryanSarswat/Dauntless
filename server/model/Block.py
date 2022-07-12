@@ -2,6 +2,7 @@ from __future__ import annotations
 import json
 import datetime
 import hashlib
+import os
 
 class HashNotComputedError(Exception):
     def __init__(self):
@@ -136,6 +137,7 @@ class Block:
 
     @staticmethod
     def loadBlocks(filename: str) -> list[Block]:
+        filename = os.path.join(filename, 'Blocks.json')
         try:
             with open(filename, 'r') as file:
                 blocks = json.loads(file.read(), object_hook=Block.fromDict)
@@ -146,6 +148,7 @@ class Block:
 
     @staticmethod
     def storeBlocks(blocks: list[Block], filename: str) -> None:
+        filename = os.path.join(filename, 'Blocks.json')
         with open(filename, 'w') as file:
             toWrite = json.dumps(blocks, default=lambda o: o.toDict(), indent = 4)
             file.write(toWrite)

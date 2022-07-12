@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
 from model.Model import ModelManager
-import chardet
+import os
 
 
 app = Flask(__name__)
@@ -9,7 +9,8 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'application/json'
 
 model = ModelManager()
-
+STORAGE_PATH = os.path.join(os.getcwd(), 'server', 'storage')
+model.loadData(STORAGE_PATH)
 
 
 @app.route('/', methods=['GET'])
@@ -37,6 +38,7 @@ def add_data():
     parentHash = data['parentHash'] if data['parentHash'] != '' else None
     author = data['author']
     newBlock = model.addBlock(header, content, author, type, parentHash)
+    model.saveData(STORAGE_PATH)
     newBlockJSON = newBlock.toDict()
     return jsonify(newBlockJSON)
 

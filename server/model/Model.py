@@ -4,6 +4,7 @@ from .Encryption import TextSignature
 from .IPFS import IPFS
 from .Block import Block
 import json
+import os
 
 class ModelManager():
     def __init__(self) -> None:
@@ -31,21 +32,23 @@ class ModelManager():
         block = Block.createNewBlock(header, data_address, data_address_hash, parentBlockHash, signature, publicKey, type=type)
         return self.blockchain.mine(parentBlockHash, block)
         
-    def saveData(self):
+    def saveData(self, filepath):
         blocks = list(self.blockchain.blockMappings.values())
-        Block.storeBlocks(blocks, "storage\\Blocks.json")
+        Block.storeBlocks(blocks, filepath)
         
-        self.IPFS.saveData()
+        self.IPFS.saveData(filepath)
         
-        with open("storage\\Users.json", 'w') as file:
+        users_filename = os.path.join(filepath, "users.json")
+        with open(users_filename, 'w') as file:
             toWrite = json.dumps(self.users, default= lambda x: x.toDict(), indent = 4)
             file.write(toWrite)
     
-    def loadData(self):
-        self.blockchain = Blockchain.loadBlockchain("src\\main\\storage\\Blocks.json")
-        self.IPFS.loadData()
+    def loadData(self, filepath):
+        self.blockchain = Blockchain.loadBlockchain(filepath)
+        self.IPFS.loadData(filepath)
         try:
-            with open("storage\\Users.json", 'r') as file:
+            users_filename = os.path.join(filepath, "users.json")
+            with open(users_filename, 'r') as file:
                 self.users = json.loads(file.read(), object_hook=TextSignature.fromDict)
         except FileNotFoundError:
             pass

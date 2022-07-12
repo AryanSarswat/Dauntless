@@ -1,24 +1,26 @@
 import hashlib
 import json
+import os
 
 class IPFS:
     def __init__(self) -> None:
         self.storage = dict()
     
-    def saveData(self):
-        with open("src\\main\\storage\\IPFS.json", 'w') as file:
+    def saveData(self, filename):
+        filename = os.path.join(filename, "IPFS.json")
+        with open(filename, 'w') as file:
             toWrite = json.dumps(self.storage, default= lambda x: x.hex(),indent = 4)
             file.write(toWrite)
     
-    def loadData(self):
+    def loadData(self, filename):
+        filename = os.path.join(filename, "IPFS.json")
         try:
-            with open("src\\main\\storage\\IPFS.json", 'r') as file:
+            with open(filename, 'r') as file:
                 file_content = file.read()
                 if file_content != '':
                     json_dict = json.loads(file_content)
                 else:
                     return dict()
-
             for key, value in json_dict.items():
                 self.storage[key] = value
         except FileNotFoundError:

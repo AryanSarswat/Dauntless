@@ -11,26 +11,15 @@ import VerifyPage from './pages/VerifyPage.js';
 
 function App() {
     
-    let [blockChain, setChain] = React.useState("");
-
-    React.useEffect(() => {
-        fetch("/")
-        .then(res => res.json())
-        .then(data => {
-            setChain(data)
-        })
-        .catch(err => console.log(err))
-    }, [blockChain])
-
     return (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Home blockchain={blockChain} setBlockChain={setChain}/>}/>
-            <Route path="/Blocks" element={<BlockPage blockchain={blockChain} setBlockChain={setChain}/>}/>
-            <Route path="/Trace" element={<Trace blockchain={blockChain} setBlockChain={setChain}/>}/>
-            <Route path="/IPFS" element={<IPFSPage blockchain={blockChain} setBlockChain={setChain}/>}/>
-            <Route path="/Verify" element={<VerifyPage blockchain={blockChain} setBlockChain={setChain}/>}/>
+            <Route index element={<Home />}/>
+            <Route path="/Blocks" element={<BlockPage />}/>
+            <Route path="/Trace" element={<Trace />}/>
+            <Route path="/IPFS" element={<IPFSPage />}/>
+            <Route path="/Verify" element={<VerifyPage />}/>
           </Route>
         </Routes>
       </BrowserRouter>
