@@ -1,6 +1,6 @@
 import React from 'react';
 import './Block.css'
-import Collapse from './Collapsible';
+import Collapse from '../../components/CollapsibleBar/Collapsible';
 
 function BlockPage(props) {
 

@@ -2,11 +2,11 @@ import './App.css';
 import React from 'react';
 import {BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
-import BlockPage from './pages/BlockPage.js';
-import Home from './pages/Home.js';
-import IPFSPage from './pages/IPFSPage.js'
-import Trace from './pages/Trace.js';
-import VerifyPage from './pages/VerifyPage.js';
+import BlockPage from './pages/BlockPage/BlockPage.js';
+import Home from './pages/HomePage/Home.js';
+import IPFSPage from './pages/IPFSPage/IPFSPage.js'
+import Trace from './pages/TracePage/Trace.js';
+import VerifyPage from './pages/VerifyPage/VerifyPage.js';
 
 
 function App() {

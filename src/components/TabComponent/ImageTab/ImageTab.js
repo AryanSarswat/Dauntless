@@ -1,6 +1,6 @@
 import React from "react";
 import './ImageTab.css';
-import APIService from "../services/APIService";
+import APIService from "../../services/APIService";
 import TextField from '@material-ui/core/TextField';
 import { Grid } from "@material-ui/core";
 

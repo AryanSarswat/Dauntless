@@ -1,8 +1,8 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-import Collapse from './Collapsible';
-import APIService from '../components/services/APIService';
+import Collapse from '../../components/CollapsibleBar/Collapsible';
+import APIService from '../../components/services/APIService';
 import './Trace.css'
 
 function Trace(props) {

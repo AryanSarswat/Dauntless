@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactSplit, { SplitDirection } from '@devbookhq/splitter'
 import "./Home.css"
-import Collapsible from './Collapsible';
-import Tabs from '../components/TabComponent/Tab.js';
+import Collapsible from '../../components/CollapsibleBar/Collapsible';
+import Tabs from '../../components/TabComponent/Tab.js';
 
 
 

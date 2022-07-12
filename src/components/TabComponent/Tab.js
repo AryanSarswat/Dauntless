@@ -1,7 +1,7 @@
 import React from "react";
 import './Tab.css'
-import TextTab from "./TextTab";
-import ImageTab from "./ImageTab";
+import TextTab from "./TextTab/TextTab";
+import ImageTab from "./ImageTab/ImageTab";
 
 function Tabs(props) {
 

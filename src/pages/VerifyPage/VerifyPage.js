@@ -1,7 +1,7 @@
 import React from 'react';
 import './VerifyPage.css';
 import Grid from '@material-ui/core/Grid';
-import VerifyTab from '../components/TabComponent/VerifyTab';
+import VerifyTab from '../../components/TabComponent/VerifyTab';
 
 
 function VerifyPage(props) {

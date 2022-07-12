@@ -1,8 +1,8 @@
 import React from "react";
 import './VerifyTab.css'
 import Grid from "@material-ui/core/Grid";
-import VerifyTextTab from "./VerifyTextTab";
-import VerifyImageTab from "./VerifyImageTab";
+import VerifyTextTab from "./VerifyTextTab/VerifyTextTab";
+import VerifyImageTab from "./VerifyImageTab/VerifyImageTab";
 
 function VerifyTab(props) {
 

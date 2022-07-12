@@ -2,7 +2,7 @@ import React from "react";
 import './TextTab.css';
 import TextField from '@material-ui/core/TextField';
 import { Grid } from "@material-ui/core";
-import APIService from "../services/APIService";
+import APIService from "../../services/APIService";
 
 function TextTab(props){
     const [header, setHeader] = React.useState("")

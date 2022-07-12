@@ -2,7 +2,7 @@ import { Grid } from '@material-ui/core';
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import './IPFSPage.css'
-import APIService from '../components/services/APIService';
+import APIService from '../../components/services/APIService';
 
 function IPFSPage(props) {
 

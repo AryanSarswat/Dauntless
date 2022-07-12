@@ -1,7 +1,7 @@
 import React from "react";
 import './VerifyImageTab.css';
 import { Grid } from "@material-ui/core";
-import APIService from "../services/APIService";
+import APIService from "../../services/APIService";
 
 function ImageTab(props){
 
