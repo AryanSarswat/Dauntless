@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
+from numpy import true_divide
 from model.Model import ModelManager
 import os
 
@@ -52,7 +53,12 @@ def trace_block(blockHash: str):
 def verifyInformation():
     data = request.get_json()
     information = data['information']
-    isTrue = model.verifyInformation(information)
-    return jsonify({'verified': isTrue})
+    block = model.verifyInformation(information)
+    if block is not None:
+        blockDict = block.toDict()
+        blockDict['verified'] = True
+        return jsonify(blockDict)
+    else:
+        return jsonify({'verified': False, 'block': None})
 
 app.run()

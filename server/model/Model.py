@@ -93,6 +93,4 @@ class ModelManager():
         if isInIPFS:
             textDataAddress = self.IPFS.getDataAddress(information)
             isVerified = self.blockchain.getBlockFromDataAddress(textDataAddress)
-            return isVerified is not None
-        else:
-            return False
+            return isVerified

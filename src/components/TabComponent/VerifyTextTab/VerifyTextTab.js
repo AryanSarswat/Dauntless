@@ -7,6 +7,13 @@ import APIService from "../../services/APIService";
 function TextTab(props){
     const [content, setContent] = React.useState("")
     const [verified, setVerified] = React.useState("")
+    const [dataAddress, setDataAddress] = React.useState("")
+    const [dataHash, setDataHash] = React.useState("")
+    const [dataHeader, setDataHeader] = React.useState("")
+    const [dataOwnerKey, setDataOwnerKey] = React.useState("")
+    const [dataTimeStamp, setDataTimeStamp] = React.useState("")
+    const [dataType, setDataType] = React.useState("")
+
 
     const onSubmit = (event) => {
         event.preventDefault();
@@ -15,6 +22,12 @@ function TextTab(props){
         .then(response => response.json())
         .then(data => {
             setVerified(data['verified'])
+            setDataHeader(data['header'])
+            setDataAddress(data['data_address'])
+            setDataHash(data['hash'])
+            setDataOwnerKey(data['owner_public_key'])
+            setDataTimeStamp(data['timestamp'])
+            setDataType(data['type'])
         })
         setContent("")
     }
@@ -31,7 +44,20 @@ function TextTab(props){
                     variant="filled"/>
                 </Grid>
                 <Grid item>
-                    {verified ? <label className="verified-TextTab">Verified</label> : <label className="not-verified-TextTab">Not Verified</label>}
+                {verified ? <label header={dataHeader} className='collapsible-label'>
+                                    <ul className='list'>
+                                        <li>Verified Block</li>
+                                        <li id={dataHeader} key ={1} className="list-pointer">Header: {dataHeader}</li>
+                                        <li id={dataHash} key={2} className="list-pointer">Hash: {dataHash}</li>
+                                        <li id={dataTimeStamp} key={3} className="list-pointer">Timestamp: {dataTimeStamp}</li>
+                                        <li id={dataAddress} key={4} className="list-pointer">Data Address: {dataAddress}</li>
+                                        <li id={dataOwnerKey} key={6} className="list-pointer">Owner Key: {dataOwnerKey}</li>
+                                        <li id={dataType} key={7} className="list-pointer">Type: {dataType}</li>
+                                    </ul>
+                                </label> 
+                        :       <label>
+                                    Not Verified
+                                </label>}
                 </Grid>
                 <Grid item>
                     <button className="add-block-btn-VerifyTextTab" onClick={onSubmit}><span>Verify Content</span></button>

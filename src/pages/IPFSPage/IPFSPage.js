@@ -22,7 +22,7 @@ function IPFSPage(props) {
     return (
         <div className='main-grid'>
             <Grid container direction={"column"} spacing={2} >
-                <Grid item>
+                <Grid item className='IPFS-header'>
                     <h1>IPFS Retrival</h1>
                 </Grid>
                 {blockToFetch && 

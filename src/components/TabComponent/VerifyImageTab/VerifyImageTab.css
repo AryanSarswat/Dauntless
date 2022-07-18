@@ -7,6 +7,21 @@
     margin: 0.5rem 0.5rem 1.25rem;
 }
 
+.collapsible-label{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    font-size: 1rem;
+}
+
+.list {
+    list-style-type: none;
+    padding: 2rem;
+    margin: 0;
+}
+
+
 .files input {
     outline: 2px dashed #92b0b3;
     outline-offset: -10px;
