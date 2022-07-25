@@ -73,6 +73,11 @@ class ModelManager():
                 trust = False
             if block.data_address not in self.IPFS.storage:
                 trust = False
+            else:
+                data = self.IPFS.getText(block.data_address)[0]
+                hash = self.IPFS.getHash(data)
+                if hash not in self.IPFS.storage:
+                    trust = False
             if not TextSignature.verify(block.data_address_hash, block.owner_signature, block.owner_public_key):
                 trust = False
             
